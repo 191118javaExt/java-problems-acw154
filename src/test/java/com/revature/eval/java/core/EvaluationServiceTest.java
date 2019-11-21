@@ -32,27 +32,27 @@ public class EvaluationServiceTest {
 	@Test
 	public void testAnEmptyString() {
 		assertEquals("", evaluationService.reverse(""));
-	}
+	} //pass
 
 	@Test
 	public void testAWord() {
 		assertEquals("tobor", evaluationService.reverse("robot"));
-	}
+	} //pass
 
 	@Test
 	public void testACapitalizedWord() {
 		assertEquals("nemaR", evaluationService.reverse("Ramen"));
-	}
+	} //pass
 
 	@Test
 	public void testASentenceWithPunctuation() {
 		assertEquals("!yrgnuh m'I", evaluationService.reverse("I'm hungry!"));
-	}
+	} //pass
 
 	@Test
 	public void testAPalindrome() {
 		assertEquals("racecar", evaluationService.reverse("racecar"));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 2
@@ -62,28 +62,28 @@ public class EvaluationServiceTest {
 		final String phrase = "Portable Network Graphics";
 		final String expected = "PNG";
 		assertEquals(expected, evaluationService.acronym(phrase));
-	}
+	} //pass
 
 	@Test
 	public void punctuation() {
 		final String phrase = "First In, First Out";
 		final String expected = "FIFO";
 		assertEquals(expected, evaluationService.acronym(phrase));
-	}
+	} //pass
 
 	@Test
 	public void NonAcronymAllCapsWord() {
 		final String phrase = "GNU Image Manipulation Program";
 		final String expected = "GIMP";
 		assertEquals(expected, evaluationService.acronym(phrase));
-	}
+	} //pass
 
 	@Test
 	public void punctuationWithoutWhitespace() {
 		final String phrase = "Complementary metal-oxide semiconductor";
 		final String expected = "CMOS";
 		assertEquals(expected, evaluationService.acronym(phrase));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 3
@@ -93,37 +93,37 @@ public class EvaluationServiceTest {
 	public void trianglesWithNoEqualSidesAreNotEquilateral() {
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(5, 4, 6);
 		assertFalse(triangle.isEquilateral());
-	}
+	} //pass
 
 	@Test
 	public void verySmallTrianglesCanBeEquilateral() {
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(0.5, 0.5, 0.5);
 		assertTrue(triangle.isEquilateral());
-	}
+	} //pass
 
 	@Test
 	public void isoscelesTrianglesMustHaveAtLeastTwoEqualSides() {
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(2, 3, 4);
 		assertFalse(triangle.isIsosceles());
-	}
+	} //pass
 
 	@Test
 	public void verySmallTrianglesCanBeIsosceles() {
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(0.5, 0.4, 0.5);
 		assertTrue(triangle.isIsosceles());
-	}
+	} //pass
 
 	@Test
 	public void trianglesWithAllSidesEqualAreNotScalene() {
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(4, 4, 4);
 		assertFalse(triangle.isScalene());
-	}
+	} //pass
 
 	@Test
 	public void verySmallTrianglesCanBeScalene() {
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(0.5, 0.4, 0.6);
 		assertTrue(triangle.isScalene());
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 4
@@ -131,27 +131,27 @@ public class EvaluationServiceTest {
 	@Test
 	public void testAValuableLetter() {
 		assertEquals(4, evaluationService.getScrabbleScore("f"));
-	}
+	} //pass
 
 	@Test
 	public void testAShortValuableWord() {
 		assertEquals(12, evaluationService.getScrabbleScore("zoo"));
-	}
+	} //pass
 
 	@Test
 	public void testAMediumWord() {
 		assertEquals(6, evaluationService.getScrabbleScore("street"));
-	}
+	} //pass
 
 	@Test
 	public void testAMediumValuableWord() {
 		assertEquals(22, evaluationService.getScrabbleScore("quirky"));
-	}
+	} //pass
 
 	@Test
 	public void testALongMixCaseWord() {
 		assertEquals(41, evaluationService.getScrabbleScore("OxyphenButazone"));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 5
@@ -161,27 +161,27 @@ public class EvaluationServiceTest {
 		final String expectedNumber = "2234567890";
 		final String actualNumber = evaluationService.cleanPhoneNumber("(223) 456-7890");
 		assertEquals(expectedNumber, actualNumber);
-	}
+	} //pass
 
 	@Test
 	public void cleansNumbersWithDots() {
 		final String expectedNumber = "2234567890";
 		final String actualNumber = evaluationService.cleanPhoneNumber("223.456.7890");
 		assertEquals(expectedNumber, actualNumber);
-	}
+	} //pass
 
 	@Test
 	public void cleansNumbersWithMultipleSpaces() {
 		final String expectedNumber = "2234567890";
 		final String actualNumber = evaluationService.cleanPhoneNumber("223 456   7890   ");
 		assertEquals(expectedNumber, actualNumber);
-	}
+	} //pass
 
 	@Test
 	public void invalidWhenMoreThan11Digits() {
 		expectedException.expect(IllegalArgumentException.class);
 		evaluationService.cleanPhoneNumber("321234567890");
-	}
+	} //pass
 
 	@Test
 	public void invalidWithNonNumeric() {
@@ -189,7 +189,7 @@ public class EvaluationServiceTest {
 		evaluationService.cleanPhoneNumber("123-abc-7890");
 		expectedException.expect(IllegalArgumentException.class);
 		evaluationService.cleanPhoneNumber("123-@:!-7890");
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 6

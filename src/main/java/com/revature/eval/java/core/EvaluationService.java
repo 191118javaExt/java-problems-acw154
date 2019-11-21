@@ -1,6 +1,8 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +16,14 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
-		
-		return "";
+		String[] s = string.split("");
+		String[] array = new String[s.length];
+		int count = 0;
+		for(int i=s.length-1; i>=0; i--) {
+			array[count] = s[i];
+			count++;
+		}
+		return String.join("", array);
 	}
 
 	/**
@@ -28,7 +36,21 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		char[] splitString = phrase.toCharArray();
+		String acro = "";
+		if(phrase.isEmpty()) {
+			return "";
+		}
+		if(Character.isLetter(splitString[0])){
+			acro += splitString[0];
+		}
+		for(int i=1; i < splitString.length; i++) {
+			if(!Character.isLetter(splitString[i-1]) && Character.isLetter(splitString[i])) {
+				acro += splitString[i];
+			}
+		}
+		//acro = String.join("", acro).replace(" ", "");
+		return acro.toUpperCase();
 	}
 
 	/**
@@ -82,16 +104,35 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			double one = getSideOne();
+			double two = getSideTwo();
+			double three = getSideThree();
+			if(one == two && two == three) {
+				return true;
+			}
+				return false;			
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
+			double one = getSideOne();
+			double two = getSideTwo();
+			double three = getSideThree();
+			if(this.isEquilateral()) {
+				return true;
+			}
+			if(one == two || one == three || two == three) {
+				return true;
+			}
 			return false;
+			
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
+			if(!this.isIsosceles()) {
+				return true;
+			}
 			return false;
 		}
 
@@ -114,7 +155,32 @@ public class EvaluationService {
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		// AEIOULNRSTDGBCMPFHVWYKJXQZ
+		HashMap<String, Integer> scrabbleScores = new HashMap<String, Integer>();
+		int total = 0;
+		String[] lettersUsed = string.toUpperCase().split("");
+		String[] scrabbleLetters = "AEIOULNRSTDGBCMPFHVWYKJXQZ".split("");
+		for(int i=0;i<scrabbleLetters.length;i++) {
+			if(i<10) {
+				scrabbleScores.put(scrabbleLetters[i], 1);
+			} else if(i<12) {
+				scrabbleScores.put(scrabbleLetters[i], 2);
+			} else if (i<16) {
+				scrabbleScores.put(scrabbleLetters[i], 3);
+			} else if (i < 21) {
+				scrabbleScores.put(scrabbleLetters[i], 4);
+			} else if (i == 21) {
+				scrabbleScores.put(scrabbleLetters[i], 5);
+			} else if (i < 24) {
+				scrabbleScores.put(scrabbleLetters[i], 8);
+			} else {
+				scrabbleScores.put(scrabbleLetters[i], 10);
+			}
+		}
+		for(int j = 0; j < lettersUsed.length; j++) {
+			total += scrabbleScores.get(lettersUsed[j]);
+		}
+		return total;
 	}
 
 	/**
@@ -150,7 +216,26 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		// TODO Throw IllegalArgumentException 
+		if(string.matches(".*[!\"#$%&'*+,/:;?@\\^_`{|}~].*"))
+	    {
+			throw new IllegalArgumentException("Phone Number must not have any nonnumeric characters");
+	    }
+		char[] phoneNum = string.toCharArray();
+		String cleaned = "";
+		if(phoneNum[0] == '1') {
+			phoneNum = Arrays.copyOfRange(phoneNum, 1, phoneNum.length);
+		}
+		for (int i = 0; i < phoneNum.length; i++ ) {
+			if (Character.isDigit(phoneNum[i])) {
+				cleaned += phoneNum[i];
+			}
+		}
+		if(cleaned.length() > 10) {
+			throw new IllegalArgumentException("Phone Number must be 10 digits or less");
+		}
+		//if(cleaned)
+		return String.join("", cleaned);
 	}
 
 	/**
