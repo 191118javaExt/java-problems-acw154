@@ -1,7 +1,9 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -248,8 +250,16 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
+		String[] words = string.split("\\W+");
+		Map<String, Integer> countedWords = new HashMap<String, Integer>();
+		for(int i=0; i<words.length; i++) {
+			Integer check = countedWords.putIfAbsent(words[i], 1);
+			if(check != null) {
+				countedWords.replace(words[i], check + 1);
+			}
+		}
 		// TODO Write an implementation for this method declaration
-		return null;
+		return countedWords;
 	}
 
 	/**
@@ -292,7 +302,33 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
-			return 0;
+			// Need some form of comparison i.e. compareTo between two generics
+			Integer search;
+			if(!sortedList.contains(t)) {
+				return -1;
+			}
+			if(t instanceof String) {
+				String s = (String) t;
+				search = Integer.parseInt(s);
+			} else {
+				search = (Integer) t;
+			}
+			List<Integer> newList = new ArrayList<Integer>();
+			for(int i=0; i <sortedList.size(); i++) {
+				Integer temp;
+				if(sortedList.get(i) instanceof String) {
+					String stringTemp = (String) sortedList.get((i));
+					temp = Integer.parseInt(stringTemp);
+				} else {
+					temp = (Integer) sortedList.get(i);
+				}
+				newList.add(temp);
+			} // Initialize new List of Integer casted objects
+			Collections.sort(newList);
+			return Collections.binarySearch(newList, search);
+			// compare search element with sortedList.indexOf(sortedList.size() / 2)
+			// if searchElement < sortedList.size(): sortedList.subList(0, sortedList.size() / 2).indexOf(t)
+			// if searchElement > sortedList.size(): sortedList.subList(sortedList.size() / 2, 0).indexOf(t) 
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -329,7 +365,29 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String[] stringWords = string.split("\\W+");
+		StringBuilder[] words = new StringBuilder[stringWords.length];
+		for (int i=0; i<words.length; i++) {
+			words[i] = new StringBuilder(stringWords[i]);
+		}
+		for (StringBuilder word: words){
+			if(word.substring(0,1).matches("[aeiouAEIOU]")) {
+				word.append("ay");
+			} else if (word.substring(0, 1).equals("q".toLowerCase())){
+				word.append(word.subSequence(0, 2) + "ay");
+				word.delete(0, 2);
+			} else {
+				for (int j=0; j<word.length(); j++) {
+					if(word.substring(j, j+1).matches("[aeiouAEIOU]")) {
+						word.append(word.subSequence(0, j) + "ay");
+						word.delete(0, j);
+						break;
+					}
+				}
+			}
+		}
+		return String.join(" ", words);
+		
 	}
 
 	/**
@@ -349,7 +407,21 @@ public class EvaluationService {
 	 */
 	public boolean isArmstrongNumber(int input) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		int total = 0;
+		// ArrayList<Integer> digits = new ArrayList<Integer>();
+		/**do {
+			digits.add(input % 10);
+			input / 10;
+		} while (input > 0);
+		*/
+		int[] digits = Integer.toString(input).chars().map(c -> c-'0').toArray();
+		if(digits.length == 2){
+			return false;
+		}
+		for(int i=0; i<digits.length; i++) {
+			total += Math.pow(digits[i], digits.length);
+		}
+		return input == total;
 	}
 
 	/**
@@ -364,7 +436,14 @@ public class EvaluationService {
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> factors = new ArrayList<Long>();
+		for(long i = 2; i <= l; i++) {
+			while (l % i == 0) {
+				factors.add(i);
+				l /= i;
+			}
+		}
+		return factors;
 	}
 
 	/**

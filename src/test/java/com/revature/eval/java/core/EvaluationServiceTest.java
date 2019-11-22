@@ -201,7 +201,7 @@ public class EvaluationServiceTest {
 
 		Map<String, Integer> actualWordCount = evaluationService.wordCount("word");
 		assertEquals(expectedWordCount, actualWordCount);
-	}
+	} //pass
 
 	@Test
 	public void countOneOfEachWord() {
@@ -212,7 +212,7 @@ public class EvaluationServiceTest {
 
 		Map<String, Integer> actualWordCount = evaluationService.wordCount("one of each");
 		assertEquals(expectedWordCount, actualWordCount);
-	}
+	} //pass
 
 	@Test
 	public void multipleOccurrencesOfAWord() {
@@ -225,7 +225,7 @@ public class EvaluationServiceTest {
 
 		Map<String, Integer> actualWordCount = evaluationService.wordCount("one fish two fish red fish blue fish");
 		assertEquals(expectedWordCount, actualWordCount);
-	}
+	} //pass
 
 	@Test
 	public void handlesCrampedLists() {
@@ -236,7 +236,7 @@ public class EvaluationServiceTest {
 
 		Map<String, Integer> actualWordCount = evaluationService.wordCount("one,two,three");
 		assertEquals(expectedWordCount, actualWordCount);
-	}
+	} //pass
 
 	@Test
 	public void handlesExpandedLists() {
@@ -247,7 +247,7 @@ public class EvaluationServiceTest {
 
 		Map<String, Integer> actualWordCount = evaluationService.wordCount("one,\ntwo,\nthree");
 		assertEquals(expectedWordCount, actualWordCount);
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 7
@@ -259,7 +259,7 @@ public class EvaluationServiceTest {
 		EvaluationService.BinarySearch<String> search = new EvaluationService.BinarySearch<>(sortedList);
 
 		assertEquals(3, search.indexOf("6"));
-	}
+	} //pass
 
 	@Test
 	public void findsAValueAtTheBeginningOfAnArray() {
@@ -268,7 +268,7 @@ public class EvaluationServiceTest {
 		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
 
 		assertEquals(0, search.indexOf(1));
-	}
+	} //pass
 
 	@Test
 	public void findsAValueAtTheEndOfAnArray() {
@@ -277,7 +277,7 @@ public class EvaluationServiceTest {
 		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedList);
 
 		assertEquals(6, search.indexOf(11));
-	}
+	} //pass
 
 	@Test
 	public void findsAValueInAnArrayOfOddLength() {
@@ -287,7 +287,7 @@ public class EvaluationServiceTest {
 		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedListOfOddLength);
 
 		assertEquals(9, search.indexOf(144));
-	}
+	} //pass
 
 	@Test
 	public void findsAValueInAnArrayOfEvenLength() {
@@ -297,7 +297,7 @@ public class EvaluationServiceTest {
 		EvaluationService.BinarySearch<Integer> search = new EvaluationService.BinarySearch<>(sortedListOfEvenLength);
 
 		assertEquals(5, search.indexOf(21));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 8
@@ -305,27 +305,27 @@ public class EvaluationServiceTest {
 	@Test
 	public void testWordBeginningWithA() {
 		assertEquals("appleay", evaluationService.toPigLatin("apple"));
-	}
+	} //pass
 
 	@Test
 	public void testThTreatedLikeAConsonantAtTheBeginningOfAWord() {
 		assertEquals("erapythay", evaluationService.toPigLatin("therapy"));
-	}
+	} //pass
 
 	@Test
 	public void testSchTreatedLikeAConsonantAtTheBeginningOfAWord() {
 		assertEquals("oolschay", evaluationService.toPigLatin("school"));
-	}
+	} //pass
 
 	@Test
 	public void testYTreatedLikeAConsonantAtTheBeginningOfAWord() {
 		assertEquals("ellowyay", evaluationService.toPigLatin("yellow"));
-	}
+	} //pass
 
 	@Test
 	public void testAWholePhrase() {
 		assertEquals("ickquay astfay unray", evaluationService.toPigLatin("quick fast run"));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 9
@@ -335,35 +335,35 @@ public class EvaluationServiceTest {
 		int input = 5;
 
 		assertTrue(evaluationService.isArmstrongNumber(input));
-	}
+	} //pass
 
 	@Test
 	public void noTwoDigitArmstrongNumbers() {
 		int input = 10;
 
 		assertFalse(evaluationService.isArmstrongNumber(input));
-	}
+	} //pass
 
 	@Test
 	public void threeDigitNumberIsArmstrongNumber() {
 		int input = 153;
 
 		assertTrue(evaluationService.isArmstrongNumber(input));
-	}
+	} //pass
 
 	@Test
 	public void threeDigitNumberIsNotArmstrongNumber() {
 		int input = 100;
 
 		assertFalse(evaluationService.isArmstrongNumber(input));
-	}
+	} //pass
 
 	@Test
 	public void fourDigitNumberIsArmstrongNumber() {
 		int input = 9474;
 
 		assertTrue(evaluationService.isArmstrongNumber(input));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 10
@@ -372,27 +372,27 @@ public class EvaluationServiceTest {
 	@Test
 	public void testPrimeNumber() {
 		assertEquals(Collections.singletonList(2L), evaluationService.calculatePrimeFactorsOf(2L));
-	}
+	} //pass
 
 	@Test
 	public void testSquareOfAPrime() {
 		assertEquals(Arrays.asList(3L, 3L), evaluationService.calculatePrimeFactorsOf(9L));
-	}
+	} //pass
 
 	@Test
 	public void testCubeOfAPrime() {
 		assertEquals(Arrays.asList(2L, 2L, 2L), evaluationService.calculatePrimeFactorsOf(8L));
-	}
+	} //pass
 
 	@Test
 	public void testProductOfPrimesAndNonPrimes() {
 		assertEquals(Arrays.asList(2L, 2L, 3L), evaluationService.calculatePrimeFactorsOf(12L));
-	}
+	} //pass
 
 	@Test
 	public void testProductOfPrimes() {
 		assertEquals(Arrays.asList(5L, 17L, 23L, 461L), evaluationService.calculatePrimeFactorsOf(901255L));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 11
