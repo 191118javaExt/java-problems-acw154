@@ -233,7 +233,7 @@ public class EvaluationService {
 				cleaned += phoneNum[i];
 			}
 		}
-		if(cleaned.length() > 10) {
+		if(cleaned.length() > 11) {
 			throw new IllegalArgumentException("Phone Number must be 10 digits or less");
 		}
 		//if(cleaned)
@@ -303,6 +303,8 @@ public class EvaluationService {
 		public int indexOf(T t) {
 			// TODO Write an implementation for this method declaration
 			// Need some form of comparison i.e. compareTo between two generics
+			
+			//Casting values into Integer and creating an ArrayList
 			Integer search;
 			if(!sortedList.contains(t)) {
 				return -1;
@@ -325,7 +327,24 @@ public class EvaluationService {
 				newList.add(temp);
 			} // Initialize new List of Integer casted objects
 			Collections.sort(newList);
-			return Collections.binarySearch(newList, search);
+			
+			//Binary Search 
+			int start = 0;
+			int end = newList.size()-1;
+			int mid = 0;
+			
+			while(start <= end) {
+				mid = (start + end) / 2;
+				if (search > newList.get(mid)) {
+					start = mid + 1;
+				} else if(search < newList.get(mid)){
+					end = mid - 1;
+				} else {
+					return mid;
+				}
+			}
+			return -1;
+			// return Collections.binarySearch(newList, search);
 			// compare search element with sortedList.indexOf(sortedList.size() / 2)
 			// if searchElement < sortedList.size(): sortedList.subList(0, sortedList.size() / 2).indexOf(t)
 			// if searchElement > sortedList.size(): sortedList.subList(sortedList.size() / 2, 0).indexOf(t) 
@@ -479,13 +498,47 @@ public class EvaluationService {
 			super();
 			this.key = key;
 		}
-
+		
+		//Probably should mention that this is ROT13
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			char[] ch = string.toCharArray();
+			String rtn = "";
+			/**StringBuilder rotAlpha = new StringBuilder("abcdefghijklmnopqrstuvwxyz");
+			int[] rotIndex = new int[26];
+			for(int i =0; i< rotIndex.length; i++) {
+				rotIndex[i] = i;
+			}
+			Map<Integer, Character> updatedROTAlpha = new HashMap<Integer, Character>();
+			for(int j=0; j<rotIndex.length; j++) {
+				updatedROTAlpha.put(rotIndex[j], rotAlpha.charAt(j));
+			}
+			*/
+			for(char c: ch) {
+				if(!Character.isLetter(c)) {
+					rtn +=c;
+				}
+				if(c >= 'a' && c <= 'z'){
+		            c = (char)(c + key);
+		            if(c > 'z'){
+		                c = (char)(c - 'z' + 'a' - 1);
+		            }
+		            rtn += c;
+		        }
+		        else if(c >= 'A' && c <= 'Z'){
+		            c = (char)(c + key);
+		            
+		            if(c > 'Z'){
+		                c = (char)(c - 'Z' + 'A' - 1);
+		            }
+		            rtn += c;
+		        }			
+			}
+			return rtn;
 		}
-
 	}
+
+	
 
 	/**
 	 * 12. Given a number n, determine what the nth prime is.
@@ -501,7 +554,25 @@ public class EvaluationService {
 	 */
 	public int calculateNthPrime(int i) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		if (i <= 0) {
+			throw new IllegalArgumentException("Argument must be greater than zero");
+		}
+		int n = 1;
+		int count = 0;
+		int j;
+		while(count < i) {
+			n+=1;
+			for (j=2; j<=n; j++) {
+				if(n % j == 0) {
+					break;
+				}
+			}
+			if(j == n) {
+				count+=1;
+			}
+		}
+		
+		return n;
 	}
 
 	/**
@@ -701,5 +772,5 @@ public class EvaluationService {
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
-
+	
 }
