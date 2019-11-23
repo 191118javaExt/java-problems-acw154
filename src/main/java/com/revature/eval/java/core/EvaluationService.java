@@ -609,7 +609,34 @@ public class EvaluationService {
 		 */
 		public static String encode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			string = string.replaceAll("\\W+", "");
+			char[] ch = string.toCharArray();
+			String rtn = "";
+			int count = 0;
+			// If Character.isDigit we add the character
+			// if character.isLetter we add the letter after transforming
+			// In either case, we increment a count variable and whenever count % 5 == 0
+			// we add a space character " "
+			for (char c: ch) {
+				if(Character.isLetter(c)) {
+					if(Character.isUpperCase(c)) {
+						rtn += Character.toLowerCase((char) ('A' + ('Z' - c)));
+						count++;
+					} else {
+						rtn += (char) ('a' + ('z' - c));
+						count++;
+					}
+				}
+				if(Character.isDigit(c)) {
+					rtn += c;
+					count++;
+				}
+				if(count % 5 == 0 && ch[ch.length-1] != c) {
+					rtn += " ";
+					count = 0;
+				}
+			}
+			return rtn;
 		}
 
 		/**
@@ -620,7 +647,9 @@ public class EvaluationService {
 		 */
 		public static String decode(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			String rtn = encode(string);
+			rtn = rtn.replaceAll(" ", "");
+			return rtn;
 		}
 	}
 

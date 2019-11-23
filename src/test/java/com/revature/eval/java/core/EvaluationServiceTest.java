@@ -470,7 +470,7 @@ public class EvaluationServiceTest {
 	@Test
 	public void testEncodeOmgInCapital() {
 		assertEquals("lnt", EvaluationService.AtbashCipher.encode("OMG"));
-	}
+	} //pass
 
 	@Test
 	public void testEncodeMindBlowingly() {
@@ -499,7 +499,7 @@ public class EvaluationServiceTest {
 	@Test
 	public void testDecodeExercism() {
 		assertEquals("exercism", EvaluationService.AtbashCipher.decode("vcvix rhn"));
-	}
+	} //pass
 
 	@Test
 	public void testDecodeASentence() {
@@ -510,7 +510,7 @@ public class EvaluationServiceTest {
 	@Test
 	public void testDecodeNumbers() {
 		assertEquals("testing123testing", EvaluationService.AtbashCipher.decode("gvhgr mt123 gvhgr mt"));
-	}
+	} //pass
 
 	@Test
 	public void testDecodeAllTheLetters() {
