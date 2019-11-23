@@ -475,23 +475,23 @@ public class EvaluationServiceTest {
 	@Test
 	public void testEncodeMindBlowingly() {
 		assertEquals("nrmwy oldrm tob", EvaluationService.AtbashCipher.encode("mindblowingly"));
-	}
+	} //pass
 
 	@Test
 	public void testEncodeNumbers() {
 		assertEquals("gvhgr mt123 gvhgr mt", EvaluationService.AtbashCipher.encode("Testing,1 2 3, testing."));
-	}
+	} //pass
 
 	@Test
 	public void testEncodeDeepThought() {
 		assertEquals("gifgs rhurx grlm", EvaluationService.AtbashCipher.encode("Truth is fiction."));
-	}
+	} //pass
 
 	@Test
 	public void testEncodeAllTheLetters() {
 		assertEquals("gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt",
 				EvaluationService.AtbashCipher.encode("The quick brown fox jumps over the lazy dog."));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 14
@@ -505,7 +505,7 @@ public class EvaluationServiceTest {
 	public void testDecodeASentence() {
 		assertEquals("anobstacleisoftenasteppingstone",
 				EvaluationService.AtbashCipher.decode("zmlyh gzxov rhlug vmzhg vkkrm thglm v"));
-	}
+	} //pass
 
 	@Test
 	public void testDecodeNumbers() {
@@ -516,7 +516,7 @@ public class EvaluationServiceTest {
 	public void testDecodeAllTheLetters() {
 		assertEquals("thequickbrownfoxjumpsoverthelazydog",
 				EvaluationService.AtbashCipher.decode("gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt"));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 15
