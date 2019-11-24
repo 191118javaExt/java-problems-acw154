@@ -661,27 +661,27 @@ public class EvaluationServiceTest {
 	@Test
 	public void testThatAValidCanadianSocialInsuranceNumberIsIdentifiedAsValidV1() {
 		assertTrue(evaluationService.isLuhnValid("046 454 286"));
-	}
+	} //pass
 
 	@Test
 	public void testThatAnInvalidCanadianSocialInsuranceNumberIsIdentifiedAsInvalid() {
 		assertFalse(evaluationService.isLuhnValid("046 454 287"));
-	}
+	} //pass
 
 	@Test
 	public void testThatAnInvalidCreditCardIsIdentifiedAsInvalid() {
 		assertFalse(evaluationService.isLuhnValid("8273 1232 7352 0569"));
-	}
+	} //pass
 
 	@Test
 	public void testThatAddingANonDigitCharacterToAValidStringInvalidatesTheString() {
 		assertFalse(evaluationService.isLuhnValid("046a 454 286"));
-	}
+	} //pass
 
 	@Test
 	public void testThatStringContainingPunctuationIsInvalid() {
 		assertFalse(evaluationService.isLuhnValid("055-444-285"));
-	}
+	} //pass-
 
 	/*******************************************************************
 	 * Question 20

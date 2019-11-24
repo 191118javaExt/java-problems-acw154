@@ -1,5 +1,6 @@
 package com.revature.eval.java.core;
 
+import java.time.Duration;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class EvaluationService {
 
@@ -677,6 +679,10 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
+		StringBuilder sb = new StringBuilder(Pattern.compile("-").matcher(string).replaceAll(""));
+
+		
+		
 		return false;
 	}
 
@@ -708,7 +714,9 @@ public class EvaluationService {
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		//Duration d = Duration.ofSeconds(1000000000L);
+		//given.plus(d);
+		return given;
 	}
 
 	/**
@@ -767,6 +775,35 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		// TODO Write an implementation for this method declaration
+		if(string.length() <= 1) {
+			return false;
+		} else {
+			int total = 0;
+			String[] isbn = string.replaceAll("\\s+", "").split("");
+			int[] arr = new int[isbn.length];
+			try {
+				for(int i=0; i<isbn.length;i++) {
+					arr[i] = Integer.parseInt(isbn[i]);
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Cannot convert non-numerical string to int");
+				return false;
+			}
+			for(int j=arr.length-1; j >= 0; j--) {
+				if(((arr.length - 1 - j) % 2 == 1)) {
+					if((arr[j] * 2) > 9){
+						total += ((arr[j] * 2) - 9);
+					} else {
+						total += arr[j] * 2;
+					}
+				} else {
+					total += arr[j] ;
+				}	
+			}
+			if (total % 10 == 0) {
+				return true;
+			}
+		}
 		return false;
 	}
 
