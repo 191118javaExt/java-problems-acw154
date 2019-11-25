@@ -1,14 +1,23 @@
 package com.revature.eval.java.core;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class EvaluationService {
 
@@ -680,9 +689,24 @@ public class EvaluationService {
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
 		StringBuilder sb = new StringBuilder(Pattern.compile("-").matcher(string).replaceAll(""));
-
-		
-		
+		//System.out.println(sb.substring(0,  sb.length()-1));
+		if (sb.length() != 10 || !sb.substring(0, sb.length()-1).matches("[0-9]+")) {
+			return false;
+		} else {
+			int total = 0;
+			if(Character.isDigit(sb.charAt(sb.length()-1)) || sb.charAt(sb.length()-1) == 'X') {
+				for(int i=0; i < sb.length(); i++) {
+					if(sb.charAt(i) == 'X') {
+						total += 10;
+					} else {
+						total += (Integer.parseInt(String.valueOf(sb.charAt(i))) * (sb.length() - i));
+					}
+				}
+			if( total % 11 == 0) {
+				return true;
+			}
+			}
+		}
 		return false;
 	}
 
@@ -701,7 +725,14 @@ public class EvaluationService {
 	 */
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		if(string.isEmpty()) {
+			return false;
+		}
+		for (char ch = 'A'; ch <= 'Z'; ch++) {
+            if ((string.indexOf(ch) < 0) && (string.indexOf((char)(ch + 32)) < 0))
+                return false;
+		}
+        return true;
 	}
 
 	/**
@@ -714,8 +745,41 @@ public class EvaluationService {
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
 		// TODO Write an implementation for this method declaration
-		//Duration d = Duration.ofSeconds(1000000000L);
-		//given.plus(d);
+		// ChronoUnit cu = new ChronoUnit();
+
+		
+		long gigasecond = 1000000000L;
+		/**
+		int year = 0;
+		int month = 0;
+		int day = 0;
+		int hour = 0;
+		int minute = 0;
+		int second = 0;
+		while (gigasecond > 0) {
+			if (gigasecond > 31556952L) {
+				year++;
+				gigasecond -= 31556952L;
+			} else if (gigasecond > 2592000L) {
+				month++;
+				gigasecond -= 2592000L;
+			} else if (gigasecond > 86400L) {
+				day++;
+				gigasecond -= 86400L;
+			} else if (gigasecond > 3600L) {
+				hour++;
+				gigasecond -= 3600L;
+			} else if (gigasecond > 60L) {
+				minute++;
+				gigasecond -= 60L;
+			} else {
+				gigasecond--;
+				second++;
+			}
+		}*/
+		//given.plus(gigasecond, given);
+		
+		//can return a subclass of Temporal
 		return given;
 	}
 
@@ -734,7 +798,16 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int total = 0;
+		Arrays.sort(set);
+		Set<Integer> setOfVals = new HashSet<Integer>();
+		int count = 0;
+		for(int j=0; j<set.length; j++) {
+			for(int n=set[j]; n < i; n += set[j]) {
+				setOfVals.add(n);
+			}
+		}
+		return setOfVals.stream().mapToInt(Integer::intValue).sum();
 	}
 
 	/**
@@ -836,6 +909,20 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
+		String[] words = string.split("([.,!?:;'\\\"]|\\s)");
+		try {
+			int operatorOne = Integer.parseInt(words[2]);
+			int operatorTwo = Integer.parseInt(words[words.length-1]);
+			switch(words[3]) {
+				case "plus": return operatorOne + operatorTwo;
+				case "minus": return operatorOne - operatorTwo;
+				case "divided": return operatorOne / operatorTwo;
+				case "multiplied": return operatorOne * operatorTwo;
+			}
+				
+		} catch(NumberFormatException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
 		return 0;
 	}
 	

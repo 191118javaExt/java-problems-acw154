@@ -524,27 +524,27 @@ public class EvaluationServiceTest {
 	@Test
 	public void validIsbnNumber() {
 		assertTrue(evaluationService.isValidIsbn("3-598-21508-8"));
-	}
+	} //pass
 
 	@Test
 	public void invalidIsbnCheckDigit() {
 		assertFalse(evaluationService.isValidIsbn("3-598-21508-9"));
-	}
+	} //pass
 
 	@Test
 	public void validIsbnNumberWithCheckDigitOfTen() {
 		assertTrue(evaluationService.isValidIsbn("3-598-21507-X"));
-	}
+	} //pass
 
 	@Test
 	public void checkDigitIsACharacterOtherThanX() {
 		assertFalse(evaluationService.isValidIsbn("3-598-21507-A"));
-	}
+	} //pass
 
 	@Test
 	public void invalidCharacterInIsbn() {
 		assertFalse(evaluationService.isValidIsbn("3-598-2K507-0"));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 16
@@ -552,27 +552,27 @@ public class EvaluationServiceTest {
 	@Test
 	public void emptySentenceIsNotPangram() {
 		assertFalse(evaluationService.isPangram(""));
-	}
+	} //pass
 
 	@Test
 	public void recognizesPerfectLowerCasePangram() {
 		assertTrue(evaluationService.isPangram("abcdefghijklmnopqrstuvwxyz"));
-	}
+	} //pass
 
 	@Test
 	public void pangramWithOnlyLowerCaseLettersIsRecognizedAsPangram() {
 		assertTrue(evaluationService.isPangram("the quick brown fox jumps over the lazy dog"));
-	}
+	} //pass
 
 	@Test
 	public void phraseMissingCharacterXIsNotPangram() {
 		assertFalse(evaluationService.isPangram("a quick movement of the enemy will jeopardize five gunboats"));
-	}
+	} //pass
 
 	@Test
 	public void phraseMissingAnotherCharacterIsNotPangram() {
 		assertFalse(evaluationService.isPangram("five boxing wizards jump quickly at it"));
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 17
@@ -617,7 +617,7 @@ public class EvaluationServiceTest {
 		int output = evaluationService.getSumOfMultiples(15, set);
 		assertEquals(30, output);
 
-	}
+	} //pass
 
 	@Test
 	public void testSumOfMultiplesOf5and6and8UpToOneHundredFifty() {
@@ -626,7 +626,7 @@ public class EvaluationServiceTest {
 		int output = evaluationService.getSumOfMultiples(150, set);
 		assertEquals(4419, output);
 
-	}
+	} //pass
 
 	@Test
 	public void testSumOfMultiplesOf5and25UpToFiftyOne() {
@@ -635,7 +635,7 @@ public class EvaluationServiceTest {
 		int output = evaluationService.getSumOfMultiples(51, set);
 		assertEquals(275, output);
 
-	}
+	} //pass
 
 	@Test
 	public void testSumOfMultiplesOf43and47UpToTenThousand() {
@@ -644,7 +644,7 @@ public class EvaluationServiceTest {
 		int output = evaluationService.getSumOfMultiples(10000, set);
 		assertEquals(2203160, output);
 
-	}
+	} //pass
 
 	@Test
 	public void testSumOfMultiplesOfOneUpToOneHundred() {
@@ -653,7 +653,7 @@ public class EvaluationServiceTest {
 		int output = evaluationService.getSumOfMultiples(100, set);
 		assertEquals(4950, output);
 
-	}
+	} //pass
 
 	/*******************************************************************
 	 * Question 19
@@ -689,26 +689,26 @@ public class EvaluationServiceTest {
 	@Test
 	public void testSingleAddition1() {
 		assertEquals(2, evaluationService.solveWordProblem("What is 1 plus 1?"));
-	}
+	} //pass
 
 	@Test
 	public void testSingleAdditionWithNegativeNumbers() {
 		assertEquals(-11, evaluationService.solveWordProblem("What is -1 plus -10?"));
-	}
+	} //pass
 
 	@Test
 	public void testSingleSubtraction() {
 		assertEquals(16, evaluationService.solveWordProblem("What is 4 minus -12?"));
-	}
+	} //pass
 
 	@Test
 	public void testSingleMultiplication() {
 		assertEquals(-75, evaluationService.solveWordProblem("What is -3 multiplied by 25?"));
-	}
+	} //pass
 
 	@Test
 	public void testSingleDivision() {
 		assertEquals(-11, evaluationService.solveWordProblem("What is 33 divided by -3?"));
-	}
+	} //pass
 
 }
