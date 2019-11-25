@@ -777,10 +777,15 @@ public class EvaluationService {
 				second++;
 			}
 		}*/
+		LocalDateTime adjDate;
+		if(given instanceof LocalDateTime) {
+			adjDate = (LocalDateTime) given;
+		} else {
+			adjDate = ((LocalDate) given).atTime(0, 0, 0);
+		}
+		return adjDate.plusSeconds(gigasecond);
 		//given.plus(gigasecond, given);
-		
 		//can return a subclass of Temporal
-		return given;
 	}
 
 	/**
