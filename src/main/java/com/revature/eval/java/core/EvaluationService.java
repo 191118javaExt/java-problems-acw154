@@ -29,13 +29,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
+		//Create a new array based on the string
 		String[] s = string.split("");
+		// Instantiate a new array
 		String[] array = new String[s.length];
 		int count = 0;
-		for(int i=s.length-1; i>=0; i--) {
+		// Loop through the string in reverse order
+		for(int i=s.length-1; i>=0; i--) { 
+			// Set the value of the array equal to the string value at index i
 			array[count] = s[i];
 			count++;
 		}
+		// Concatenate elements of the string array
 		return String.join("", array);
 	}
 
@@ -48,21 +53,25 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
+		// Instantiate char array from String phrase
 		char[] splitString = phrase.toCharArray();
 		String acro = "";
 		if(phrase.isEmpty()) {
+			// Check edge case in which argument is an empty string
 			return "";
 		}
 		if(Character.isLetter(splitString[0])){
+			// The first character of the phrase, if a letter, should always be part of the acronym
 			acro += splitString[0];
 		}
 		for(int i=1; i < splitString.length; i++) {
+			// Check for a space behind every letter and add that letter to the acronym
 			if(!Character.isLetter(splitString[i-1]) && Character.isLetter(splitString[i])) {
 				acro += splitString[i];
 			}
 		}
 		//acro = String.join("", acro).replace(" ", "");
+		// Capitalize acronym string
 		return acro.toUpperCase();
 	}
 
@@ -116,10 +125,10 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
 			double one = getSideOne();
 			double two = getSideTwo();
 			double three = getSideThree();
+			// Return true if all sides are equivalent
 			if(one == two && two == three) {
 				return true;
 			}
@@ -131,9 +140,11 @@ public class EvaluationService {
 			double one = getSideOne();
 			double two = getSideTwo();
 			double three = getSideThree();
+			// Check if all sides are equivalent
 			if(this.isEquilateral()) {
 				return true;
 			}
+			// Check if at least two sides are equivalent
 			if(one == two || one == three || two == three) {
 				return true;
 			}
@@ -142,7 +153,7 @@ public class EvaluationService {
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			// Check if at least two sides are equivalent
 			if(!this.isIsosceles()) {
 				return true;
 			}
@@ -167,8 +178,8 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
 		// AEIOULNRSTDGBCMPFHVWYKJXQZ
+		// Create dictionary and place every letter with its corresponding value
 		HashMap<String, Integer> scrabbleScores = new HashMap<String, Integer>();
 		int total = 0;
 		String[] lettersUsed = string.toUpperCase().split("");
@@ -190,6 +201,7 @@ public class EvaluationService {
 				scrabbleScores.put(scrabbleLetters[i], 10);
 			}
 		}
+		// Loop through the string and compute the score based on the dictionary values
 		for(int j = 0; j < lettersUsed.length; j++) {
 			total += scrabbleScores.get(lettersUsed[j]);
 		}
@@ -228,26 +240,29 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		// TODO Throw IllegalArgumentException 
+		// Check if input string is a valid phone number
 		if(string.matches(".*[!\"#$%&'*+,/:;?@\\^_`{|}~].*"))
 	    {
 			throw new IllegalArgumentException("Phone Number must not have any nonnumeric characters");
 	    }
 		char[] phoneNum = string.toCharArray();
 		String cleaned = "";
+		// Change reference of char array phoneNum to a new char array that does not include the 
+		// country code '1'
 		if(phoneNum[0] == '1') {
 			phoneNum = Arrays.copyOfRange(phoneNum, 1, phoneNum.length);
 		}
+		// Remove all dashes, dots, etc.
 		for (int i = 0; i < phoneNum.length; i++ ) {
 			if (Character.isDigit(phoneNum[i])) {
 				cleaned += phoneNum[i];
 			}
 		}
+		// Check if the cleaned phone number has appropriate length
 		if(cleaned.length() > 11) {
 			throw new IllegalArgumentException("Phone Number must be 10 digits or less");
 		}
-		//if(cleaned)
+		// Return the concatenated and cleaned phone number string
 		return String.join("", cleaned);
 	}
 
@@ -261,15 +276,18 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
+		// Split the string by words and eliminate white space
 		String[] words = string.split("\\W+");
+		// Instantiate a new Dictionary with string:number pairings
 		Map<String, Integer> countedWords = new HashMap<String, Integer>();
 		for(int i=0; i<words.length; i++) {
+			// For each word, place the word in the dictionary if it does not already exist
 			Integer check = countedWords.putIfAbsent(words[i], 1);
+			// Otherwise, increment the int count of the word
 			if(check != null) {
 				countedWords.replace(words[i], check + 1);
 			}
 		}
-		// TODO Write an implementation for this method declaration
 		return countedWords;
 	}
 
@@ -311,11 +329,8 @@ public class EvaluationService {
 	static class BinarySearch<T> {
 		private List<T> sortedList;
 
-		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
-			// Need some form of comparison i.e. compareTo between two generics
-			
-			//Casting values into Integer and creating an ArrayList
+		public int indexOf(T t) {			
+			// Cast the generic t object into an Integer object
 			Integer search;
 			if(!sortedList.contains(t)) {
 				return -1;
@@ -326,6 +341,7 @@ public class EvaluationService {
 			} else {
 				search = (Integer) t;
 			}
+			// Initialize ArrayList of Integers of casted T values from sortedList<T>
 			List<Integer> newList = new ArrayList<Integer>();
 			for(int i=0; i <sortedList.size(); i++) {
 				Integer temp;
@@ -336,7 +352,8 @@ public class EvaluationService {
 					temp = (Integer) sortedList.get(i);
 				}
 				newList.add(temp);
-			} // Initialize new List of Integer casted objects
+			} 
+			// Sort the new list 
 			Collections.sort(newList);
 			
 			//Binary Search 
@@ -345,20 +362,25 @@ public class EvaluationService {
 			int mid = 0;
 			
 			while(start <= end) {
+				// Get the middle index of the ArrayList
 				mid = (start + end) / 2;
+				// Compare value at start index to the value of the middle index of ArrayList
 				if (search > newList.get(mid)) {
+					// Branch into upper half of ArrayList
 					start = mid + 1;
 				} else if(search < newList.get(mid)){
+					// Branch into lower half of arrayList
 					end = mid - 1;
 				} else {
+					// Return the index of the middle value of the ArrayList when it is equal
+					// to the value of the start index of ArrayList
 					return mid;
 				}
 			}
+			// Statement could be removed if everything after the contains check was wrapped around
+			// an else block
 			return -1;
-			// return Collections.binarySearch(newList, search);
-			// compare search element with sortedList.indexOf(sortedList.size() / 2)
-			// if searchElement < sortedList.size(): sortedList.subList(0, sortedList.size() / 2).indexOf(t)
-			// if searchElement > sortedList.size(): sortedList.subList(sortedList.size() / 2, 0).indexOf(t) 
+			// return Collections.binarySearch(newList, search); 
 		}
 
 		public BinarySearch(List<T> sortedList) {
@@ -395,8 +417,10 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
+		// Initialize String array by splitting input string by word
 		String[] stringWords = string.split("\\W+");
 		StringBuilder[] words = new StringBuilder[stringWords.length];
+		// Fill StringBuilder array with each word in the stringWords array
 		for (int i=0; i<words.length; i++) {
 			words[i] = new StringBuilder(stringWords[i]);
 		}
