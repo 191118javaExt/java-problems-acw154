@@ -903,7 +903,7 @@ public class EvaluationService {
 					arr[i] = Integer.parseInt(isbn[i]);
 				}
 			} catch (NumberFormatException e) {
-				System.out.println("Cannot convert non-numerical string to int");
+				System.out.println("Error: Conversion " + e.getMessage() + " is invalid");
 				return false;
 			}
 			// Loop through the int array and increment a total value by the calculated 
@@ -961,7 +961,8 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
+		// This function operates on the assumption that the word problem format
+		// will not change
 		// Remove all punctuation and white space
 		String[] words = string.split("([.,!?:;'\\\"]|\\s)");
 		try {
@@ -978,7 +979,7 @@ public class EvaluationService {
 			}
 				
 		} catch(NumberFormatException e) {
-			System.out.println("Error: " + e.getMessage());
+			System.out.println("Error: Conversion " + e.getMessage() + " is invalid");
 		}
 		return 0;
 	}
